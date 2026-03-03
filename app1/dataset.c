@@ -128,5 +128,13 @@ int deletion(DATASET *dp, int age)
 
 int maxAgeGap(DATASET *dp)
 {
-    return 0;
+    assert(dp != NULL);
+
+    int gap = 0;
+
+    if (dp->count >= 2)
+        gap = dp->elts[dp->count - 1].age - dp->elts[0].age;
+
+    printf("[maxAgeGap] Maximum age gap = %d\n", gap);
+    return gap;
 }
