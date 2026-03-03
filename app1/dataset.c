@@ -94,7 +94,36 @@ int searchAge(DATASET *dp, int age)
 
 int deletion(DATASET *dp, int age)
 {
-    return 0;
+    assert(dp != NULL);
+
+    printf("[deletion] Deleting Age=%d\n", age);
+
+    if (dp->count == 0) {
+        printf("[deletion] Dataset is empty theres nothing to delete\n");
+        return 0;
+    }
+
+    int start = lowerBound(dp->elts, dp->count, age);
+
+    int end = start;
+    while (end < dp->count && dp->elts[end].age == age)
+        end++;
+
+    int numDeleted = end - start;
+
+    if (numDeleted == 0) {
+        printf("[deletion] cant find Age=%d .\n", age);
+        return 0;
+    }
+
+    for (int i = start; i + numDeleted < dp->count; i++) {
+        dp->elts[i] = dp->elts[i + numDeleted];
+    }
+
+    dp->count -= numDeleted;
+
+    printf("[deletion] Deleted %d record(s) successfully :)\n", numDeleted);
+    return numDeleted;
 }
 
 int maxAgeGap(DATASET *dp)
