@@ -23,6 +23,22 @@ struct dataset {
     STUDENT *elts;
 };
 
+static int lowerBound(STUDENT *arr, int n, int age)
+{
+    int left = 0;
+    int right = n;
+
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid].age < age)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+
+    return left;
+}
+
 DATASET *createDataSet(int maxStudents)
 {
     assert(maxStudents > 0);
