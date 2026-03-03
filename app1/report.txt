@@ -1,1 +1,44 @@
+Application 1: College Data Set
 
+Data Structure:
+
+A fixed-size array of STUDENT records sorted in non-decreasing order by Age.
+
+Justification:
+Application 1 specifies that insertions and deletions are not frequent, the maximum  
+number of students is known, and searches are frequently performed by Age.
+Maintaining the array sorted by Age allows binary search to locate the first
+occurrence of age in O(log n) time. Because equal ages are stored
+contiguously, all matching records can then be accessed sequentially.
+Additionally, since the array is sorted, the maximum age gap can be computed
+in constant time by subtracting the minimum age from the maximum age.
+
+Worst-Case Time Complexity:
+
+createDataSet:
+O(1)
+Allocates memory and initializes fields.
+
+destroyDataSet:
+O(1)
+Frees allocated memory.
+
+insertion:
+O(n)
+May require shifting up to n elements to maintain sorted order.
+
+searchAge:
+O(log n + k)
+Binary search locates the first matching index in O(log n),
+then up to k matching records are scanned.
+So therefore according to O complexity rules worst case is O(n).
+
+deletion:
+O(n)
+Locates the range of matching ages and shifts remaining elements
+to fill the gap.
+
+maxAgeGap:
+O(1)
+Since the array is sorted, the minimum age is at index 0 and
+the maximum age is at index count - 1.
