@@ -55,6 +55,11 @@ DATASET *createDataSet(int maxStudents)
 
 void destroyDataSet(DATASET *dp)
 {
+    assert(dp != NULL);
+
+    free(dp->elts);
+    free(dp->flags);
+    free(dp);
 }
 
 bool insertion(DATASET *dp, int id, int age)
