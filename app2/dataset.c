@@ -121,7 +121,20 @@ bool insertion(DATASET *dp, int id, int age)
 
 bool searchID(DATASET *dp, int id)
 {
-  
+    assert(dp != NULL);
+
+    printf("[searchID] Searching for ID=%d\n", id);
+
+    bool found = false;
+    int idx = findSlot(dp, id, &found);
+
+    if (found) {
+        printf("[searchID] Found: ID=%d Age=%d\n", dp->elts[idx].id, dp->elts[idx].age);
+        return true;
+    }
+
+    printf("[searchID] not found.\n");
+    return false;
 }
 
 bool deletion(DATASET *dp, int id)
