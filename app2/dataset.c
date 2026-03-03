@@ -139,5 +139,21 @@ bool searchID(DATASET *dp, int id)
 
 bool deletion(DATASET *dp, int id)
 {
-    
+    assert(dp != NULL);
+
+    printf("[deletion] Deleting ID=%d\n", id);
+
+    bool found = false;
+    int idx = findSlot(dp, id, &found);
+
+    if (!found) {
+        printf("[deletion] couldn't find ID=%d\n", id);
+        return false;
+    }
+
+    dp->flags[idx] = DELETED;
+    dp->count--;
+
+    printf("[deletion] Deleted successfully.\n");
+    return true;
 }
