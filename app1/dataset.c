@@ -48,7 +48,22 @@ void destroyDataSet(DATASET *dp)
 
 bool insertion(DATASET *dp, int id, int age)
 {
-    return false;
+    assert(dp != NULL);
+
+    if (dp->count >= dp->length)
+        return false;
+
+    int pos = lowerBound(dp->elts, dp->count, age);
+
+    for (int i = dp->count; i > pos; i--) {
+        dp->elts[i] = dp->elts[i - 1];
+    }
+
+    dp->elts[pos].id = id;
+    dp->elts[pos].age = age;
+    dp->count++;
+
+    return true;
 }
 
 int searchAge(DATASET *dp, int age)
