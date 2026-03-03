@@ -1,1 +1,37 @@
+Application 2 – College Data Set
 
+Data Structure Chosen:
+Hash table with linear probing.
+
+Justification:
+Application 2 specifies that insertions and deletions are infrequent,
+the maximum number of students is known, and searches are frequently
+performed by student ID. A hash table provides average-case O(1)
+search time. Linear probing is used for collision resolution
+as satated in the project description. A prime table length
+is selected to reduce clustering and improve key distribution.
+
+Worst-Case Time Complexity:
+
+createDataSet:
+O(m)
+Initializes the hash table of size m by setting all flags to EMPTY.
+
+destroyDataSet:
+O(1)
+Frees allocated memory.
+
+insertion:
+O(m) worst-case, O(1) average
+In the worst case, probing may scan the entire table.
+Under reasonable load factor, insertion is constant time on average.
+
+searchID:
+O(m) worst-case, O(1) average
+Linear probing may scan the entire table in the worst case,
+but is constant time on average.
+
+deletion:
+O(m) worst-case, O(1) average
+Deletion requires probing to locate the key.
+Worst-case scans entire table; average-case constant time.
