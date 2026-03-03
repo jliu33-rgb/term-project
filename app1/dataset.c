@@ -69,7 +69,27 @@ bool insertion(DATASET *dp, int id, int age)
 
 int searchAge(DATASET *dp, int age)
 {
-    return 0;
+    assert(dp != NULL);
+
+    printf("[searchAge] SEarching for Age=%d\n", age);
+
+    if (dp->count == 0) {
+        printf("[searchAge] Dataset empty.\n");
+        return 0;
+    }
+
+    int start = lowerBound(dp->elts, dp->count, age);
+    int found = 0;
+
+    for (int i = start; i < dp->count && dp->elts[i].age == age; i++) {
+        printf("[searchAge] Found: ID=%d Age=%d\n", dp->elts[i].id, dp->elts[i].age);
+        found++;
+    }
+
+    if (found == 0)
+        printf("[searchAge] Not found.\n");
+
+    return found;
 }
 
 int deletion(DATASET *dp, int age)
