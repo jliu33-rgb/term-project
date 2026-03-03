@@ -23,11 +23,26 @@ struct dataset {
 
 DATASET *createDataSet(int maxStudents)
 {
-    return NULL;
+    assert(maxStudents > 0);
+
+    DATASET *dp = malloc(sizeof(*dp));
+    assert(dp != NULL);
+
+    dp->count = 0;
+    dp->length = maxStudents;
+
+    dp->elts = malloc(sizeof(STUDENT) * (size_t)maxStudents);
+    assert(dp->elts != NULL);
+
+    return dp;
 }
 
 void destroyDataSet(DATASET *dp)
 {
+    assert(dp != NULL);
+
+    free(dp->elts);
+    free(dp);
 }
 
 bool insertion(DATASET *dp, int id, int age)
