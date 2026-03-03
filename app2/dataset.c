@@ -98,7 +98,25 @@ void destroyDataSet(DATASET *dp)
 
 bool insertion(DATASET *dp, int id, int age)
 {
-   
+    assert(dp != NULL);
+
+    if (dp->count >= dp->maxStudents)
+        return false;
+
+    bool found = false;
+    int idx = findSlot(dp, id, &found);
+    if (idx == -1)
+        return false;
+
+    if (found)
+        return true;
+
+    dp->elts[idx].id = id;
+    dp->elts[idx].age = age;
+    dp->flags[idx] = FILLED;
+    dp->count++;
+
+    return true;
 }
 
 bool searchID(DATASET *dp, int id)
