@@ -30,6 +30,40 @@ struct dataset {
     unsigned char *flags;
 };
 
+// find probe position helpr
+static int hashIndex(DATASET *dp, int key, int i)
+{
+    return (key + i) % dp->length;
+}
+
+// find where index is at or should go helper
+static int findSlot(DATASET *dp, int id, bool *found)
+{
+    int firstDeleted = -1;
+
+    for (int i = 0; i < dp->length; i++) {
+        int idx = hashIndex(dp, id, i);
+
+        if (dp->flags[idx] == FILLED && dp->elts[idx].id == id) {
+            *found = true;
+            return idx;
+        }
+
+        if (dp->flags[idx] == DELETED && firstDeleted == -1)
+            firstDeleted = idx;
+
+        if (dp->flags[idx] == EMPTY) {
+            *found = false;
+            if (firstDeleted != -1)
+                return firstDeleted;
+            return idx;
+        }
+    }
+
+    *found = false;
+    return -1;
+}
+
 DATASET *createDataSet(int maxStudents)
 {
     assert(maxStudents > 0);
