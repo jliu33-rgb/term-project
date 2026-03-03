@@ -32,7 +32,25 @@ struct dataset {
 
 DATASET *createDataSet(int maxStudents)
 {
-    
+    assert(maxStudents > 0);
+
+    DATASET *dp = malloc(sizeof(*dp));
+    assert(dp != NULL);
+
+    dp->count = 0;
+    dp->maxStudents = maxStudents;
+
+    dp->length = 5003;   /* prime number > 3000 */
+
+    dp->elts = malloc(sizeof(STUDENT) * dp->length);
+    dp->flags = malloc(sizeof(unsigned char) * dp->length);
+
+    assert(dp->elts != NULL && dp->flags != NULL);
+
+    for (int i = 0; i < dp->length; i++)
+        dp->flags[i] = EMPTY;
+
+    return dp;
 }
 
 void destroyDataSet(DATASET *dp)
