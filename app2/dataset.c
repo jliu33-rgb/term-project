@@ -81,5 +81,24 @@ bool insertion(DATASET *dp, int id, int age)
     return true;
 }
 
-bool searchID(DATASET *dp, int id) {  }
+bool searchID(DATASET *dp, int id)
+{
+    assert(dp != NULL);
+
+    printf("[searchID] Searching for ID=%d\n", id);
+
+    if (!validID(id)) {
+        printf("[searchID] Invalid ID.\n");
+        return false;
+    }
+
+    if (dp->present[id]) {
+        printf("[searchID] foudn ID=%d Age=%d\n", dp->elts[id].id, dp->elts[id].age);
+        return true;
+    }
+
+    printf("[searchID] Not found.\n");
+    return false;
+}
+
 bool deletion(DATASET *dp, int id) {}
