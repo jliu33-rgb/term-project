@@ -26,6 +26,11 @@ struct dataset {
     unsigned char *present;
 };
 
+static bool validID(int id)
+{
+    return (id >= MIN_ID && id <= MAX_ID);
+}
+
 DATASET *createDataSet(int maxStudents) { }
 void destroyDataSet(DATASET *dp) { }
 bool insertion(DATASET *dp, int id, int age) { }
