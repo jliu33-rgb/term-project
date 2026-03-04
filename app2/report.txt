@@ -1,37 +1,34 @@
 Application 2 – College Data Set
 
 Data Structure Chosen:
-Hash table with linear probing.
+Direct addressing table indexed by student ID (index = ID).
 
 Justification:
-Application 2 specifies that insertions and deletions are infrequent,
-the maximum number of students is known, and searches are frequently
-performed by student ID. A hash table provides average-case O(1)
-search time. Linear probing is used for collision resolution
-as satated in the project description. A prime table length
-is selected to reduce clustering and improve key distribution.
+Application 2 performs frequent searches by student ID, and it
+searches/deletes IDs in the range 1–2000. With direct addressing,
+each ID maps directly to an array index, eliminating collisions and probing.
+This gives O(1) worst-case search, insertion, and deletion. This approach is
+memory-efficient only when the keys limit is small and known in advance,
+which would fit the case presented.
 
 Worst-Case Time Complexity:
 
 createDataSet:
-O(m)
-Initializes the hash table of size m by setting all flags to EMPTY.
+O(1)
+Initializes the presence array for universe size U, which is basically linear.
 
 destroyDataSet:
 O(1)
 Frees allocated memory.
 
 insertion:
-O(m) worst-case, O(1) average
-In the worst case, probing may scan the entire table.
-Under reasonable load factor, insertion is constant time on average.
+O(1)
+Direct index assignment with a presence check.
 
 searchID:
-O(m) worst-case, O(1) average
-Linear probing may scan the entire table in the worst case,
-but is constant time on average.
+O(1)
+Direct presence check and constant-time access.
 
 deletion:
-O(m) worst-case, O(1) average
-Deletion requires probing to locate the key.
-Worst-case scans entire table; average-case constant time.
+O(1)
+Clears presence flag in constant time.
