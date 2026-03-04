@@ -101,4 +101,25 @@ bool searchID(DATASET *dp, int id)
     return false;
 }
 
-bool deletion(DATASET *dp, int id) {}
+bool deletion(DATASET *dp, int id)
+{
+    assert(dp != NULL);
+
+    printf("[deletion] Deleting ID=%d\n", id);
+
+    if (!validID(id)) {
+        printf("[deletion] Delete failed, invadli ID.\n");
+        return false;
+    }
+
+    if (!dp->present[id]) {
+        printf("[deletion] ID=%d not found, delete failed..\n", id);
+        return false;
+    }
+
+    dp->present[id] = 0;
+    dp->count--;
+
+    printf("[deletion] Deleted successfully.\n");
+    return true;
+}
