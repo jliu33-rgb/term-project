@@ -31,7 +31,26 @@ static bool validID(int id)
     return (id >= MIN_ID && id <= MAX_ID);
 }
 
-DATASET *createDataSet(int maxStudents) { }
+DATASET *createDataSet(int maxStudents)
+{
+    assert(maxStudents > 0);
+
+    DATASET *dp = malloc(sizeof(*dp));
+    assert(dp != NULL);
+
+    dp->count = 0;
+    dp->maxStudents = maxStudents;
+
+    dp->elts = malloc(sizeof(STUDENT) * (MAX_ID + 1));
+    dp->present = malloc(sizeof(unsigned char) * (MAX_ID + 1));
+    assert(dp->elts != NULL && dp->present != NULL);
+
+    for (int i = 0; i <= MAX_ID; i++)
+        dp->present[i] = 0;
+
+    return dp;
+}
+
 void destroyDataSet(DATASET *dp) { }
 bool insertion(DATASET *dp, int id, int age) { }
 bool searchID(DATASET *dp, int id) {  }
