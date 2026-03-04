@@ -60,6 +60,26 @@ void destroyDataSet(DATASET *dp)
     free(dp);
 }
 
-bool insertion(DATASET *dp, int id, int age) { }
+bool insertion(DATASET *dp, int id, int age)
+{
+    assert(dp != NULL);
+
+    if (!validID(id))
+        return false;
+
+    if (dp->present[id])
+        return true;
+
+    if (dp->count >= dp->maxStudents)
+        return false;
+
+    dp->elts[id].id = id;
+    dp->elts[id].age = age;
+    dp->present[id] = 1;
+    dp->count++;
+
+    return true;
+}
+
 bool searchID(DATASET *dp, int id) {  }
 bool deletion(DATASET *dp, int id) {}
