@@ -51,7 +51,15 @@ DATASET *createDataSet(int maxStudents)
     return dp;
 }
 
-void destroyDataSet(DATASET *dp) { }
+void destroyDataSet(DATASET *dp)
+{
+    assert(dp != NULL);
+
+    free(dp->elts);
+    free(dp->present);
+    free(dp);
+}
+
 bool insertion(DATASET *dp, int id, int age) { }
 bool searchID(DATASET *dp, int id) {  }
 bool deletion(DATASET *dp, int id) {}
